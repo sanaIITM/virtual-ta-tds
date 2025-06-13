@@ -9,6 +9,10 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 app = Flask(__name__)
 
+@app.route("/", methods=["GET"])
+def home():
+    return "Virtual TA is live! Use POST /api/ to ask questions."
+
 @app.route("/api/", methods=["POST"])
 def answer_question():
     data = request.get_json()
@@ -20,7 +24,8 @@ def answer_question():
         messages=[
             {
                 "role": "system",
-                "content": "You are a helpful TA for the Tools in Data Science course (TDS Jan 2025). Answer student questions using course materials and previous discussions."
+                "content": "You are a helpful TA for the Tools in Data Science course (TDS Jan 2025). Answer student questions using course materials and previous 
+discussions."
             },
             {"role": "user", "content": question}
         ]
