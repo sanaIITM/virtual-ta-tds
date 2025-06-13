@@ -1,10 +1,13 @@
 import os
 from flask import Flask, request, jsonify
 from dotenv import load_dotenv
-import openai
+from openai import OpenAI
 
+# Load environment variables
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+
+# Initialize OpenAI client (new SDK style)
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 app = Flask(__name__)
 
@@ -18,7 +21,7 @@ def answer_question():
     question = data.get("question", "")
 
     try:
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
                 {
@@ -30,7 +33,7 @@ def answer_question():
         )
 
         return jsonify({
-            "answer": response["choices"][0]["message"]["content"].strip(),
+            "answer": response.choices[0].message.content.strip(),
             "links": []
         })
 
