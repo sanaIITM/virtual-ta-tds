@@ -23,8 +23,7 @@ def answer_question():
             messages=[
                 {
                     "role": "system",
-                    "content": "You are a helpful TA for the Tools in Data Science course (TDS Jan 2025). Answer student questions using course materials and previous 
-discussions."
+                    "content": "You are a helpful TA for the Tools in Data Science course (TDS Jan 2025). Answer student questions using course materials and previous discussions."
                 },
                 {"role": "user", "content": question}
             ]
